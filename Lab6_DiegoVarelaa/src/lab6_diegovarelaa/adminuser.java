@@ -5,13 +5,17 @@
  */
 package lab6_diegovarelaa;
 
+import java.io.BufferedWriter;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -45,42 +49,42 @@ public class adminuser {
     public String toString() {
         return "adminuser{" + "listauser=" + listauser + '}';
     }
-     public void cargarArchivo() {
+     public void escribirArchivo() throws IOException {
+        FileWriter fw = null;
+        BufferedWriter bw = null;
         try {
-            listauser = new ArrayList();
-            User temp;
-            if (archivo.exists()) {
-                FileInputStream entrada = new FileInputStream(archivo);
-                ObjectInputStream objeto = new ObjectInputStream(entrada);
-                try {
-                    while ((temp = (User) objeto.readObject()) != null) {
-                        listauser.add(temp);
-                    }
-                } catch (EOFException E) {
-
-                }
-                entrada.close();
-                objeto.close();
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    public void escribirArchivo() {
-        FileOutputStream fw = null;
-        ObjectOutputStream bw = null;
-        try {
-            fw = new FileOutputStream(archivo);
-            bw = new ObjectOutputStream(fw);
+            fw = new FileWriter(archivo, false);
+            bw = new BufferedWriter(fw);
             for (User t : listauser) {
-                bw.writeObject(t);
+                bw.write(t.getNombre()+ ";");
+                bw.write(t.getNickname()+ ";");
+                bw.write(t.getPassword()+ ";");
+                bw.write(t.getFechanac()+";");
             }
             bw.flush();
-            fw.close();
-            bw.close();
-
-        } catch (Exception e) {
-
+        } catch (Exception ex) {
         }
+        bw.close();
+        fw.close();
+    }
+
+    public void cargarArchivo() {
+        Scanner sc = null;
+        listauser = new ArrayList();
+        if (archivo.exists()) {
+            try {
+                sc = new Scanner(archivo);
+                sc.useDelimiter(";");
+                while (sc.hasNext()) {
+                    listauser.add(new User(sc.next(),
+                            sc.next(),
+                            sc.next(),sc.next()
+                    )
+                    );
+                }
+            } catch (Exception ex) {
+            }
+            sc.close();
+        }//FIN IF
     }
 }

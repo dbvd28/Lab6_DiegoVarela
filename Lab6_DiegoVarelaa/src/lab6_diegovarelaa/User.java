@@ -15,12 +15,20 @@ public class User {
     private String nombre;
     private String nickname;
     private String password;
-    private Date fechanac;
+    private String fechanac;
 
-    public User(String nombre, String nickname, String password, Date fechanac) {
+    public User(String nombre, String nickname, String password, String fechanac) {
         this.nombre = nombre;
         this.nickname = nickname;
         this.password = password;
+        this.fechanac = fechanac;
+    }
+
+    public String getFechanac() {
+        return fechanac;
+    }
+
+    public void setFechanac(String fechanac) {
         this.fechanac = fechanac;
     }
 
@@ -48,13 +56,7 @@ public class User {
         this.password = password;
     }
 
-    public Date getFechanac() {
-        return fechanac;
-    }
-
-    public void setFechanac(Date fechanac) {
-        this.fechanac = fechanac;
-    }
+   
 
     @Override
     public String toString() {

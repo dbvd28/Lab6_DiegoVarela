@@ -5,7 +5,9 @@
  */
 package lab6_diegovarelaa;
 
+import java.io.File;
 import java.util.Date;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,8 +38,8 @@ public class Lab6 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tf_username = new javax.swing.JTextField();
+        tf_password = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -54,6 +56,11 @@ public class Lab6 extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iniciar-sesion (1).png"))); // NOI18N
         jButton1.setText("Ingresar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -79,11 +86,11 @@ public class Lab6 extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2))
+                                .addComponent(tf_password))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addComponent(jButton1))
@@ -100,11 +107,11 @@ public class Lab6 extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(82, 82, 82))
@@ -214,30 +221,58 @@ public class Lab6 extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        adminuser au
+        try {
+
+            adminuser au
                     = new adminuser("./user.txt");
             au.cargarArchivo();
-            String nombre,nickname,pass;
-            Date actual=new Date();
+            String nombre, nickname, pass, fecha1;
+            Date actual = new Date();
             Date fecha;
-            nombre=tf_nombre.getText();
-            nickname=tf_nickname.getText();
-            pass=tf_contraseña.getText();
-            fecha=dc_fecha.getDate();
-            User us=new User(nombre, nickname, pass, fecha);
+            nombre = tf_nombre.getText();
+            nickname = tf_nickname.getText();
+            pass = tf_contraseña.getText();
+            fecha1 = dc_fecha.getDate().toString();
+            fecha = dc_fecha.getDate();
             for (int i = 0; i < au.getListauser().size(); i++) {
-            if(((User)au.getListauser().get(i)).getNickname().equals(tf_nickname)){
-                JOptionPane.showMessageDialog(null, "El username ya esta siendo ocupado por otra persona porfavor ingrese otro");
+                if (((User) au.getListauser().get(i)).getNickname().equals(tf_nickname)) {
+                    JOptionPane.showMessageDialog(null, "El username ya esta siendo ocupado por otra persona porfavor ingrese otro");
+                }
             }
-        }
-           if((actual.getYear()-fecha.getYear())<=13){
-           JOptionPane.showMessageDialog(null, "Debe de ser mayor de 13 para entrar a este chat");
-           }
+            if ((actual.getYear() - fecha.getYear()) <= 13) {
+                JOptionPane.showMessageDialog(null, "Debe de ser mayor de 13 para entrar a este chat");
+            }
             JOptionPane.showMessageDialog(null, "Se creo su user exitosamente");
+            User us = new User(nombre, nickname, pass, fecha1);
             au.getListauser().add(us);
             au.escribirArchivo();
-           
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        File f = null;
+        Scanner sc = null;
+        try {
+            f = new File("./user.txt");
+            sc = new Scanner(f);
+            sc.useDelimiter(";");
+            String nom, user, pass;
+            while (sc.hasNext()) {
+                nom = sc.next();
+                user = sc.next();
+                pass = sc.next();
+                System.out.println(user);
+                System.out.println(pass);
+                if (user.equals(tf_username.getText()) && pass.equals(tf_password.getText())) {
+                    JOptionPane.showMessageDialog(null, "Bienvenido" + tf_username.getText());
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -289,10 +324,10 @@ public class Lab6 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField tf_contraseña;
     private javax.swing.JTextField tf_nickname;
     private javax.swing.JTextField tf_nombre;
+    private javax.swing.JTextField tf_password;
+    private javax.swing.JTextField tf_username;
     // End of variables declaration//GEN-END:variables
 }
