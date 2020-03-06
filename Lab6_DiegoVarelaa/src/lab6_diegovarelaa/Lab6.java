@@ -8,6 +8,7 @@ package lab6_diegovarelaa;
 import java.io.File;
 import java.util.Date;
 import java.util.Scanner;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +33,15 @@ public class Lab6 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ventanauser = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ta_cifrado = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jl_user = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ta_mensajeria = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -51,6 +61,70 @@ public class Lab6 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+
+        ta_cifrado.setColumns(20);
+        ta_cifrado.setRows(5);
+        jScrollPane1.setViewportView(ta_cifrado);
+
+        jl_user.setModel(new DefaultListModel()
+        );
+        jScrollPane2.setViewportView(jl_user);
+
+        ta_mensajeria.setColumns(20);
+        ta_mensajeria.setRows(5);
+        ta_mensajeria.setText("Mensajeria");
+        jScrollPane3.setViewportView(ta_mensajeria);
+
+        jLabel9.setText("Contactos:");
+
+        jButton3.setText("Send");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ventanauserLayout = new javax.swing.GroupLayout(ventanauser.getContentPane());
+        ventanauser.getContentPane().setLayout(ventanauserLayout);
+        ventanauserLayout.setHorizontalGroup(
+            ventanauserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ventanauserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(37, 37, 37))
+        );
+        ventanauserLayout.setVerticalGroup(
+            ventanauserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel9)
+                .addGroup(ventanauserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ventanauserLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
+                .addGroup(ventanauserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ventanauserLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(38, 38, 38))))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -246,6 +320,9 @@ public class Lab6 extends javax.swing.JFrame {
             User us = new User(nombre, nickname, pass, fecha1);
             au.getListauser().add(us);
             au.escribirArchivo();
+            DefaultListModel model = (DefaultListModel) jl_user.getModel();
+            model.addElement(us);
+            jl_user.setModel(model);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton2MouseClicked
@@ -263,16 +340,46 @@ public class Lab6 extends javax.swing.JFrame {
                 nom = sc.next();
                 user = sc.next();
                 pass = sc.next();
-                System.out.println(user);
-                System.out.println(pass);
+              
                 if (user.equals(tf_username.getText()) && pass.equals(tf_password.getText())) {
-                    JOptionPane.showMessageDialog(null, "Bienvenido" + tf_username.getText());
+                    JOptionPane.showMessageDialog(null, "Bienvenido " + tf_username.getText());
+                    ventanauser.pack();
+                    ventanauser.setLocationRelativeTo(null);
+                    ventanauser.setVisible(true);
                 }
             }
         } catch (Exception e) {
 
         }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+       String nuevo=new String();
+       String restar=new String();
+        String mensaje=ta_cifrado.getText();
+     if(mensaje.endsWith("1")){
+          for (int i = 0; i <ta_cifrado.getText().length() ; i++) {
+             if(ta_cifrado.getText().charAt(i)=='a'||ta_cifrado.getText().charAt(i)=='e'||ta_cifrado.getText().charAt(i)=='i'||ta_cifrado.getText().charAt(i)=='o'||ta_cifrado.getText().charAt(i)=='u'){
+                
+                 restar+=mensaje.substring(0,i);
+                 nuevo+=mensaje.substring(i,mensaje.length());
+                 nuevo+=restar+"ay";
+             }
+             System.out.println(nuevo);
+         } 
+         }if(mensaje.endsWith("2")){
+              String mennsaje=new String();
+         for (int i = 0; i < mensaje.length(); i++) {
+             int x=mensaje.charAt(i);
+          
+           mennsaje+=Integer.toString(x);
+           
+         }
+         ta_mensajeria.setText(mensaje+"\n"+mennsaje);
+     }
+        
+    }//GEN-LAST:event_jButton3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -313,6 +420,7 @@ public class Lab6 extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dc_fecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -321,13 +429,21 @@ public class Lab6 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JList<String> jl_user;
+    private javax.swing.JTextArea ta_cifrado;
+    private javax.swing.JTextArea ta_mensajeria;
     private javax.swing.JTextField tf_contraseña;
     private javax.swing.JTextField tf_nickname;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_password;
     private javax.swing.JTextField tf_username;
+    private javax.swing.JDialog ventanauser;
     // End of variables declaration//GEN-END:variables
 }
