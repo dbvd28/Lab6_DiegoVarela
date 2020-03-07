@@ -5,7 +5,9 @@
  */
 package lab6_diegovarelaa;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Date;
 import java.util.Scanner;
 import javax.swing.DefaultListModel;
@@ -42,6 +44,7 @@ public class Lab6 extends javax.swing.JFrame {
         ta_mensajeria = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -84,24 +87,38 @@ public class Lab6 extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Cerrar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout ventanauserLayout = new javax.swing.GroupLayout(ventanauser.getContentPane());
         ventanauser.getContentPane().setLayout(ventanauserLayout);
         ventanauserLayout.setHorizontalGroup(
             ventanauserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ventanauserLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(37, 37, 37))
+            .addGroup(ventanauserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ventanauserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ventanauserLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(ventanauserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(37, 37, 37))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addContainerGap())))))
         );
         ventanauserLayout.setVerticalGroup(
             ventanauserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +129,9 @@ public class Lab6 extends javax.swing.JFrame {
                     .addGroup(ventanauserLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addGap(3, 3, 3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanauserLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,7 +359,7 @@ public class Lab6 extends javax.swing.JFrame {
                 nom = sc.next();
                 user = sc.next();
                 pass = sc.next();
-              
+
                 if (user.equals(tf_username.getText()) && pass.equals(tf_password.getText())) {
                     JOptionPane.showMessageDialog(null, "Bienvenido " + tf_username.getText());
                     ventanauser.pack();
@@ -355,31 +374,102 @@ public class Lab6 extends javax.swing.JFrame {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-       String nuevo=new String();
-       String restar=new String();
-        String mensaje=ta_cifrado.getText();
-     if(mensaje.endsWith("1")){
-          for (int i = 0; i <ta_cifrado.getText().length() ; i++) {
-             if(ta_cifrado.getText().charAt(i)=='a'||ta_cifrado.getText().charAt(i)=='e'||ta_cifrado.getText().charAt(i)=='i'||ta_cifrado.getText().charAt(i)=='o'||ta_cifrado.getText().charAt(i)=='u'){
-                
-                 restar+=mensaje.substring(0,i);
-                 nuevo+=mensaje.substring(i,mensaje.length());
-                 nuevo+=restar+"ay";
-             }
-             System.out.println(nuevo);
-         } 
-         }if(mensaje.endsWith("2")){
-              String mennsaje=new String();
-         for (int i = 0; i < mensaje.length(); i++) {
-             int x=mensaje.charAt(i);
-          
-           mennsaje+=Integer.toString(x);
-           
-         }
-         ta_mensajeria.setText(mensaje+"\n"+mennsaje);
-     }
-        
+        String nuevo = new String();
+        String restar = new String();
+        String palabra = new String();
+        String mensaje = ta_cifrado.getText();
+        if (mensaje.endsWith("1")) {
+            for (int i = 0; i < ta_cifrado.getText().length(); i++) {
+                if (ta_cifrado.getText().charAt(i) == 'a' || ta_cifrado.getText().charAt(i) == 'e' || ta_cifrado.getText().charAt(i) == 'i' || ta_cifrado.getText().charAt(i) == 'o' || ta_cifrado.getText().charAt(i) == 'u') {
+
+                    restar += mensaje.substring(0, i);
+                    nuevo += mensaje.substring(i, mensaje.length());
+                    nuevo += restar + "ay";
+                }
+                System.out.println(nuevo);
+            }
+        }
+        if (mensaje.endsWith("2")) {
+            String mennsaje = new String();
+            for (int i = 0; i < mensaje.length(); i++) {
+                int x = mensaje.charAt(i);
+                mennsaje += Integer.toString(x) + " ";
+            }
+            ta_mensajeria.setText(mensaje + "\n" + mennsaje);
+        }
+        if (mensaje.endsWith("3")) {
+            String nuevo2 = "";
+            mensaje.toLowerCase();
+            String arreglo = "";
+            String arreglo2 = "";
+            for (int i = 97; i < 110; i++) {
+                arreglo += (char) i;
+            }
+            for (int i = 97; i < 110; i++) {
+                arreglo2 += (char) i;
+            }
+            for (int i = 0; i < mensaje.length(); i++) {
+                for (int j = 0; j < arreglo.length(); j++) {
+                    if (mensaje.charAt(i) == arreglo.charAt(j)) {
+                        nuevo += arreglo2.charAt(i);
+                    }
+                    for (int k = 0; k < arreglo2.length(); k++) {
+                        if (mensaje.charAt(i) == arreglo2.charAt(k)) {
+                            nuevo += arreglo.charAt(i);
+                        }
+                    }
+                    if (mensaje.charAt(i) == ' ') {
+                        nuevo += ' ';
+                    }
+                }
+            }
+            ta_mensajeria.setText(mensaje + "\n" + nuevo);
+        } else {
+            for (int i = 0; i < mensaje.length(); i++) {
+                if (mensaje.charAt(i) == '4') {
+                    palabra = mensaje.substring(i + 1, mensaje.length());
+                }
+            }
+            char[][] mat = new char[mensaje.length() / palabra.length() + 1][palabra.length()];
+            int cont = 0;
+            for (int i = 0; i < mat.length; i++) {
+                for (int j = 0; j < mat[0].length; j++) {
+                    if (i == 0) {
+                        mat[i][j] = palabra.charAt(j);
+                    } else {
+                        if (cont >= mensaje.length()) {
+                            mat[i][j] = ' ';
+                        } else {
+                            mat[i][j] = mensaje.charAt(i);
+                        }
+                    }
+                }
+            }
+
+        }
+
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        String nombre = JOptionPane.showInputDialog(null, "Como lo desea guardar?");
+        File f = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            f = new File("./" + nombre + ".txt");
+            fw = new FileWriter(f, true);//obligatorio
+            bw = new BufferedWriter(fw);
+            bw.write(ta_mensajeria.getText());
+            bw.flush();
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -421,6 +511,7 @@ public class Lab6 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
